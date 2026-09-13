@@ -182,7 +182,7 @@ claude mcp add onchain-wallet -e HEDERA_AGENT_ACCOUNT_ID=0.0.x \\
         <div className="section-head">
           <div>
             <span className="label">For tool authors</span>
-            <h2 style={{ marginTop: 8 }}>Get discovered. Get paid. Keep 100%.</h2>
+            <h2 style={{ marginTop: 8 }}>Get discovered by agents. Get paid. Keep 100%.</h2>
             <p>
               Wrap your API in x402 with one call, or list an endpoint that already speaks
               it. Agents find it, call it, and pay you directly. The router takes nothing.
