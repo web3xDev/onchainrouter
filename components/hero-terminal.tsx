@@ -48,9 +48,8 @@ const SCRIPT: Line[] = [
   { text: "Payment settled", tone: "ok", group: 3, icon: "check" },
   { text: "200 OK", tone: "ok", group: 4, icon: "check" },
   { text: "", tone: "dim", group: 4 },
-  { text: "Compound V3", tone: "key", group: 5, answer: true },
-  { text: "4.51% supply APY", tone: "key", group: 5, answer: true },
-  { text: "$376M liquidity", tone: "dim", group: 5, answer: true },
+  { text: "Lend on Compound V3: 4.51%, $376M behind it.", tone: "key", group: 5, answer: true },
+  { text: "Iron Bank's 75% discarded: stale, no liquidity.", tone: "dim", group: 5, answer: true },
 ];
 
 /** Each step lands as a block, a beat apart; the whole exchange takes about a second. */
