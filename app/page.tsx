@@ -169,7 +169,7 @@ claude mcp add onchain-wallet -e HEDERA_AGENT_ACCOUNT_ID=0.0.x \\
             <div className="step-n">03</div>
             <h3>The agent pays, for a result</h3>
             <p>
-              The agent signs with its own wallet. The tool runs and returns the answer. If
+              The agent signs with its own wallet. The tool runs and returns the result. If
               it has nothing to say, the payment is never settled.
             </p>
           </div>
