@@ -2638,6 +2638,7 @@ html {
 
 .docs-body {
   max-width: 76ch;
+  min-width: 0;
   padding-bottom: 0;
 }
 
@@ -2650,6 +2651,13 @@ html {
 .docs-body h3 {
   font-size: 15px;
   margin: 22px 0 8px;
+}
+
+/* Inline code such as an address or a long call must break rather than widen the page. */
+.docs-body p code,
+.docs-body li code,
+.docs-body td code {
+  overflow-wrap: anywhere;
 }
 
 .docs-body .code-wrap + .code-wrap {
@@ -2705,7 +2713,9 @@ html {
 
 @media (max-width: 860px) {
   .docs {
-    grid-template-columns: 1fr;
+    /* minmax(0, …) so a wide code block scrolls inside its box instead of
+       stretching the column past the phone. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
   .docs-nav {
