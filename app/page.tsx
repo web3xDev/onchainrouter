@@ -76,7 +76,7 @@ export default function Home() {
             <h2 style={{ marginTop: 8 }}>One endpoint. Every tool.</h2>
             <p className="lede">
               Add the router and a wallet to Claude Code. From then on, your agent can
-              discover tools, pay for them, and get answers.
+              discover tools, pay for them, and get results: an answer, or an action taken.
             </p>
             <Link href="/connect" className="link" style={{ fontSize: 14 }}>
               Other agents and the SDK →
@@ -167,7 +167,7 @@ claude mcp add onchain-wallet -e HEDERA_AGENT_ACCOUNT_ID=0.0.x \\
           </div>
           <div className="step">
             <div className="step-n">03</div>
-            <h3>The agent pays, for an answer</h3>
+            <h3>The agent pays, for a result</h3>
             <p>
               The agent signs with its own wallet. The tool runs and returns the answer. If
               it has nothing to say, the payment is never settled.
