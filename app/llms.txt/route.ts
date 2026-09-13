@@ -45,7 +45,7 @@ ${SITE_NAME} is a catalogue of paid onchain tools for AI agents. Listing tools i
 
 - MCP (Streamable HTTP): \`${base}/mcp\`. \`tools/list\` is free. A paid call returns a payment-required result until the signed payment is passed as the \`payment\` argument (or in \`_meta["x402/payment"]\`).
 - HTTP: \`POST ${base}/api/tools/<slug>\` with a JSON body. Unpaid: 402 with a \`PAYMENT-REQUIRED\` header. Paid: send the signed payment in \`PAYMENT-SIGNATURE\`.
-- Wallet for chat clients: \`npx onchainrouter wallet\` (MCP server with \`sign_x402_payment\`).
+- Wallet for chat clients: \`npx onchainrouter wallet\` (MCP server; \`call_paid_tool\` calls a router tool and pays in one step, \`sign_x402_payment\` signs any x402 request).
 - SDK: \`npm install onchainrouter\`; \`pay(url, input, wallet)\` on the client, \`paid(config, handler)\` on the server.
 
 ## Payment rails (testnet)

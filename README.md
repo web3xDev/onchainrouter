@@ -117,9 +117,11 @@ Malformed arguments are rejected before the payment step, so a typo costs nothin
 ### From a chat client, with a wallet beside it
 
 Claude Code does not sign anything itself, and does not need to: give it a wallet as a
-second MCP server. When a tool answers "payment required", Claude hands the request to
-the wallet, gets a signature back, and calls the tool again with it as the `payment`
-argument. `.mcp.json` in this repo registers exactly that pair.
+second MCP server. Claude calls the wallet's `call_paid_tool`; the wallet calls the
+router, gets the 402, signs it and sends the paid call in one step, then returns the
+answer with a receipt. One tool call, a few seconds. (The wallet also exposes
+`sign_x402_payment` for the manual three-step flow and for other x402 services.)
+`.mcp.json` in this repo registers exactly that pair.
 
 ```
 claude mcp add --transport http onchainrouter https://onchainrouter.io/mcp

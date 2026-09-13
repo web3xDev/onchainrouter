@@ -100,7 +100,16 @@ claude mcp add onchain-wallet \
   -- npx -y onchainrouter wallet
 ```
 
-When a paid tool answers "payment required", the agent hands the request to `sign_x402_payment`, gets a signed payment back, and calls the tool again with it. The wallet knows nothing about any particular service; it signs x402, so any x402 service can be paid through it.
+The wallet exposes four tools:
+
+- `call_paid_tool(tool, args, network?)`: calls a tool on the router and pays for it in the same step. One tool call from the chat model; the 402, the signature and the paid retry happen inside the wallet, milliseconds apart. Returns the answer plus a receipt (network, payer, transaction, explorer link). This is the one to use.
+- `list_router_tools()`: names and arguments of every router tool, free.
+- `sign_x402_payment(paymentRequired, network?)`: signs any x402 payment request and returns the payload, for services other than the router or for the manual three-step flow.
+- `wallet_info()`: which rails this wallet can sign on.
+
+The router defaults to `https://onchainrouter.io/mcp`; override with `--router <url>` or `ONCHAINROUTER_URL`. `ONCHAINROUTER_PREFER_NETWORK=hedera:testnet` (or `eip155:5042002`) picks a rail when both are offered.
+
+Why one step matters: a Hedera x402 signature is only valid for about two minutes. A chat model that signs, then thinks, then calls again can miss that window. `call_paid_tool` never does.
 
 Fund a wallet that exists only for this. Never point it at a key you would mind losing.
 

@@ -103,10 +103,12 @@ claude mcp add onchain-wallet \\
         </Code>
         <p>
           Then ask something the tools can answer: <em>where should I lend USDC on base?</em>{" "}
-          Claude calls <code>lending_rates</code>, gets a payment-required result, hands it
-          to <code>sign_x402_payment</code>, calls the tool again with the signature, and
-          reads the answer. Three tool calls, no action from you. For Arc through a Circle
-          agent wallet, pass the four <code>CIRCLE_*</code> variables instead of a key.
+          Claude calls the wallet&apos;s <code>call_paid_tool</code>; the wallet fetches the
+          router&apos;s 402, signs it and sends the paid call, all in one step, and hands back
+          the answer with a receipt. One tool call, a few seconds, no action from you. The
+          wallet also exposes <code>sign_x402_payment</code> for other x402 services. For Arc
+          through a Circle agent wallet, pass the four <code>CIRCLE_*</code> variables instead
+          of a key.
         </p>
 
         <h2 id="http">HTTP reference</h2>

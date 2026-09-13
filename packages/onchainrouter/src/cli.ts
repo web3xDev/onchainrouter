@@ -3,7 +3,10 @@ import { serveWallet } from "./wallet.js";
 
 const USAGE = `onchainrouter
 
-  onchainrouter wallet    run the agent wallet as an MCP server on stdio
+  onchainrouter wallet [--router <mcp url>]
+      run the agent wallet as an MCP server on stdio. call_paid_tool pays and calls
+      the router in one step; --router defaults to https://onchainrouter.io/mcp
+      (or ONCHAINROUTER_URL). ONCHAINROUTER_PREFER_NETWORK picks a rail.
 
 Keys come from the environment:
   HEDERA_AGENT_ACCOUNT_ID, HEDERA_AGENT_PRIVATE_KEY        Hedera, local ECDSA key
@@ -17,10 +20,12 @@ Register it beside a paid MCP server, e.g. in Claude Code:
     -e ARC_AGENT_PRIVATE_KEY=0x... -- npx -y onchainrouter wallet
 `;
 
-const [, , command] = process.argv;
+const [, , command, ...rest] = process.argv;
 
 if (command === "wallet") {
-  serveWallet().catch((error) => {
+  const at = rest.indexOf("--router");
+  const routerUrl = at >= 0 ? rest[at + 1] : undefined;
+  serveWallet({ routerUrl }).catch((error) => {
     console.error(error);
     process.exit(1);
   });

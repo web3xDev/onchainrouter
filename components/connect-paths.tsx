@@ -48,7 +48,7 @@ const { data, receipt } = await pay(
         </>
       ) : (
         <>
-          <p>The router, plus a wallet MCP that signs when a tool asks for payment. Keys stay in your environment.</p>
+          <p>The router, plus a wallet MCP. Ask a question; the wallet calls the tool and pays for it in one step. Keys stay in your environment.</p>
           <Code lang="sh">
             {`claude mcp add --transport http onchainrouter ${base}/mcp
 
