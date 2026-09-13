@@ -524,17 +524,37 @@ year. Compound shows 591 days, Gitcoin 1,128. Dormant governance and governance
 that moved to a contract the subgraph does not watch produce the same data, so the
 tool says it cannot tell, and charges nothing.
 
-### 12 Sept: video
-
-*pending*
-
 ### 11 Sept: agent wallets and polish
 
-*pending*
+The router stopped paying for anyone. The server-pays MCP mode went, and with it any
+key on the router side; the agent's wallet became an MCP server of its own
+(`mcp/wallet.ts`, one tool: `sign_x402_payment`), so a chat client with no x402
+library can still pay. Per-tool payout landed: every registry entry names its own
+addresses, the 402 carries them, and a test tool paid to a different Arc address
+settled there. External x402 endpoints can be listed and are relayed as is over HTTP
+and MCP; the submit page reads their 402 before it lets you file one. Two more tools
+(`protocol_health`, `governance_pulse`), lending coverage widened from six chains to
+nineteen indexed and nine live, a probe that measures it, and a day of design passes on
+the site.
 
-### 12 Sept: documentation and demo
+### 12 Sept: documentation, package, deploy
 
-*pending*
+The `onchainrouter` npm package: `paid()` puts an x402 paywall in front of any
+function on the author's own server, `pay()` and `createWallet()` are the agent side,
+and `npx onchainrouter wallet` is the chat-client wallet from the registry rather than
+a checkout. That closed the gap left by refusing to proxy plain APIs: anyone with an
+API can list a tool. Listing opened to agents too, through a free `submit_tool` on MCP
+and `POST /api/submit`, both returning a prefilled issue and the registry line a PR
+would add. A sixth tool, `liquidation_pressure`, which no longer trusts the subgraph's
+`isActive` flag after finding aave-v3's WETH market marked inactive with billions
+borrowed. Submit page rebuilt as four steps; FAQ, docs page, `/llms.txt`, mobile nav.
+Two claims in the Hedera notes withdrawn after re-checking the sources. Deployed to
+Vercel at onchainrouter.io; package published; every path re-verified against the
+live site with real settlements on both rails.
+
+### 13 Sept: video and submission
+
+Video, 2 to 4 minutes; submission with The Graph, Hedera and Arc partner prizes.
 
 ---
 
