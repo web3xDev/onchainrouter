@@ -116,27 +116,29 @@ Malformed arguments are rejected before the payment step, so a typo costs nothin
 
 ### From a chat client, with a wallet beside it
 
-Claude Code does not sign anything itself, and does not need to: give it a wallet as a
-second MCP server. Claude calls the wallet's `call_paid_tool`; the wallet calls the
-router, gets the 402, signs it and sends the paid call in one step, then returns the
-answer with a receipt. One tool call, a few seconds. (The wallet also exposes
+Claude Code does not sign anything itself, and does not need to: give it the wallet from
+the npm package as its one MCP server. Claude calls the wallet's `call_paid_tool`; the
+wallet calls the router, gets the 402, signs it and sends the paid call in one step, then
+returns the answer with a receipt. One tool call, a few seconds. (The wallet also exposes
 `sign_x402_payment` for the manual three-step flow and for other x402 services.)
-`.mcp.json` in this repo registers exactly that pair.
 
 ```
-claude mcp add --transport http onchainrouter https://onchainrouter.io/mcp
-claude mcp add onchain-wallet \
+claude mcp add onchainrouter \
   -e HEDERA_AGENT_ACCOUNT_ID=0.0.x -e HEDERA_AGENT_PRIVATE_KEY=0x... \
   -e ARC_AGENT_PRIVATE_KEY=0x... \
   -- npx -y onchainrouter wallet
 ```
 
+Already have an x402 wallet? Add the router directly with
+`claude mcp add --transport http onchainrouter https://onchainrouter.io/mcp` and pay its
+402s yourself.
+
 `npx onchainrouter wallet` is the published reference wallet (source in
-`packages/onchainrouter`; `mcp/wallet.ts` is the same thing run from this checkout). One
-tool, `sign_x402_payment`, backed by the keys in the environment. It knows nothing about
-the router; it signs x402 requests, so any x402 service can be paid through it.
-`npm run mcp:wallet:check` replays the three steps with a plain MCP client and no x402
-library on the client side.
+`packages/onchainrouter`). `mcp/wallet.ts` is the older one-tool version run from this
+checkout: `sign_x402_payment` only, backed by the keys in the environment, knowing
+nothing about the router. `.mcp.json` registers it next to a local router for
+development. `npm run mcp:wallet:check` replays the three steps with a plain MCP client
+and no x402 library on the client side.
 
 ### What backs the wallet
 

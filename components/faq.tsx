@@ -30,7 +30,7 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         From its own wallet. In code, <code>npm install onchainrouter</code> and <code>pay(url, input, wallet)</code>. In Claude
-        Code, add the router and <code>npx onchainrouter wallet</code> as two MCP servers; the wallet calls the tool and pays for it in one step.
+        Code, add <code>npx onchainrouter wallet</code> as an MCP server; it calls the tool and pays for it in one step.
         See <Link href="/connect" className="link">Connect</Link>.
       </>
     ),

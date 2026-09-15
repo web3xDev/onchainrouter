@@ -48,15 +48,16 @@ const { data, receipt } = await pay(
         </>
       ) : (
         <>
-          <p>The router, plus a wallet MCP. Ask a question; the wallet calls the tool and pays for it in one step. Keys stay in your environment.</p>
+          <p>One MCP server, from the npm package. Ask a question; it calls the tool and pays for it in one step. Keys stay in your environment.</p>
           <Code lang="sh">
-            {`claude mcp add --transport http onchainrouter ${base}/mcp
-
-claude mcp add onchain-wallet \\
+            {`claude mcp add onchainrouter \\
   -e HEDERA_AGENT_ACCOUNT_ID=0.0.x -e HEDERA_AGENT_PRIVATE_KEY=0x... \\
   -e ARC_AGENT_PRIVATE_KEY=0x... \\
   -- npx -y onchainrouter wallet`}
           </Code>
+          <p className="hint" style={{ marginTop: 10 }}>
+            Already have an x402 wallet? Connect it straight to <code>{base}/mcp</code>; the package is not needed.
+          </p>
         </>
       )}
     </div>

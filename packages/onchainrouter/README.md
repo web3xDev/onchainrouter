@@ -90,11 +90,10 @@ Spend caps are per payment. A service asking for more than the cap is refused be
 
 ## Chat clients: `npx onchainrouter wallet`
 
-Claude Code cannot sign a payment. Give it a wallet as a second MCP server:
+Claude Code cannot sign a payment. Give it this wallet as its one MCP server; it talks to the router itself:
 
 ```
-claude mcp add --transport http onchainrouter https://onchainrouter.io/mcp
-claude mcp add onchain-wallet \
+claude mcp add onchainrouter \
   -e HEDERA_AGENT_ACCOUNT_ID=0.0.12345 -e HEDERA_AGENT_PRIVATE_KEY=0x... \
   -e ARC_AGENT_PRIVATE_KEY=0x... \
   -- npx -y onchainrouter wallet

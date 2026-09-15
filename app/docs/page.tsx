@@ -90,25 +90,28 @@ receipt?.explorer;      // HashScan link on Hedera; Gateway transfer id on Arc`}
 
         <h2 id="claude">Quickstart: Claude Code</h2>
         <p>
-          Claude Code cannot sign a payment, so it gets two MCP servers: the router, and a
-          wallet that signs when a tool asks. Keys stay in your environment.
+          Claude Code cannot sign a payment, so it gets one MCP server from the npm package: a
+          wallet that talks to the router and pays when a tool asks. Keys stay in your
+          environment.
         </p>
         <Code lang="sh">
-          {`claude mcp add --transport http onchainrouter ${base}/mcp
-
-claude mcp add onchain-wallet \\
+          {`claude mcp add onchainrouter \\
   -e HEDERA_AGENT_ACCOUNT_ID=0.0.12345 -e HEDERA_AGENT_PRIVATE_KEY=0x... \\
   -e ARC_AGENT_PRIVATE_KEY=0x... \\
   -- npx -y onchainrouter wallet`}
         </Code>
         <p>
           Then ask something the tools can answer: <em>where should I lend USDC on base?</em>{" "}
-          Claude calls the wallet&apos;s <code>call_paid_tool</code>; the wallet fetches the
-          router&apos;s 402, signs it and sends the paid call, all in one step, and hands back
-          the answer with a receipt. One tool call, a few seconds, no action from you. The
-          wallet also exposes <code>sign_x402_payment</code> for other x402 services. For Arc
-          through a Circle agent wallet, pass the four <code>CIRCLE_*</code> variables instead
-          of a key.
+          Claude calls <code>call_paid_tool</code>; the wallet fetches the router&apos;s 402,
+          signs it and sends the paid call, all in one step, and hands back the answer with a
+          receipt. One tool call, a few seconds, no action from you. The wallet also exposes{" "}
+          <code>sign_x402_payment</code> for other x402 services. For Arc through a Circle
+          agent wallet, pass the four <code>CIRCLE_*</code> variables instead of a key.
+        </p>
+        <p>
+          Already have an x402 wallet? Add the router directly with{" "}
+          <code>claude mcp add --transport http onchainrouter {base}/mcp</code> and pay its 402s
+          yourself; the package is not needed.
         </p>
 
         <h2 id="http">HTTP reference</h2>

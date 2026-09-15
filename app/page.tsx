@@ -9,7 +9,6 @@ import { Reveal } from "@/components/reveal";
 import { Brand, type BrandId } from "@/components/brand";
 import { Code } from "@/components/code";
 import { Author } from "@/components/author";
-import { siteUrl } from "@/lib/site";
 
 // The rails are read from the deployment's own configuration, so this renders per
 // request rather than being frozen into the build. A page that says "0 rails live"
@@ -19,7 +18,6 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   const live = rails();
   const featured = catalogue().slice(0, 2);
-  const base = siteUrl();
 
   // Each tool sets its own price, so the bar quotes the floor, not a promise.
   const cheapest = TOOLS.map((t) => t.price).sort(
@@ -75,7 +73,7 @@ export default function Home() {
             <span className="label">Connect</span>
             <h2 style={{ marginTop: 8 }}>One endpoint. Every tool.</h2>
             <p className="lede">
-              Add the router and a wallet to Claude Code. From then on, your agent can
+              One command adds OnchainRouter to Claude Code. From then on, your agent can
               discover tools, pay for them, and get results: an answer, or an action taken.
             </p>
             <Link href="/connect" className="link" style={{ fontSize: 14 }}>
@@ -83,11 +81,9 @@ export default function Home() {
             </Link>
           </div>
           <Code lang="sh">
-            {`claude mcp add --transport http onchainrouter \\
-  ${base}/mcp
-
-claude mcp add onchain-wallet -e HEDERA_AGENT_ACCOUNT_ID=0.0.x \\
-  -e HEDERA_AGENT_PRIVATE_KEY=0x... -e ARC_AGENT_PRIVATE_KEY=0x... \\
+            {`claude mcp add onchainrouter \\
+  -e HEDERA_AGENT_ACCOUNT_ID=0.0.x -e HEDERA_AGENT_PRIVATE_KEY=0x... \\
+  -e ARC_AGENT_PRIVATE_KEY=0x... \\
   -- npx -y onchainrouter wallet`}
           </Code>
         </div>
